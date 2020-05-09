@@ -2,9 +2,9 @@ from api.utils.database import db
 from marshmallow_sqlalchemy import ModelSchema
 from marshmallow import fields
 
-class Book(db.Model):
+class Books(db.Model):
     __tablename__ = 'books'
-    id = db.Column(db.Integer,primary_key=True,auto_increment=True)
+    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
     title = db.Column(db.String(50))
     year = db.Column(db.Integer)
     author_id = db.Column(db.Integer,db.ForeignKey('authors.id'))
@@ -21,7 +21,7 @@ class Book(db.Model):
 
 class BookSchema(ModelSchema):
     class Meta(ModelSchema.Meta):
-        model = Book
+        model = Books
         sqla_session = db.session
     id = fields.Number(dump_only= True)
     title = fields.String(required=True)
