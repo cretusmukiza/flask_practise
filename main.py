@@ -9,6 +9,7 @@ import api.utils.responses as resp
 from api.routes.authors import author_routes
 from api.routes.books import book_routes
 from api.routes.users import user_routes
+from api.utils.email import mail
 import os
 env = os.environ.get('WORK_ENV')
 if env == 'PROD':
@@ -23,12 +24,13 @@ app.config.from_object(app_config)
 db.init_app(app)
 jwt = JWTManager(app)
 Migrate(app,db)
+mail.init_app(app)
 with app.app_context():
     db.create_all()
+
 app.register_blueprint(author_routes,url_prefix='/api/authors')
 app.register_blueprint(book_routes,url_prefix= '/api/books')
 app.register_blueprint(user_routes,url_prefix="/api/users")
-
 
 # Global http configurations
 @app.after_request

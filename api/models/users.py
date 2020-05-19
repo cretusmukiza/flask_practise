@@ -7,11 +7,14 @@ class User(db.Model):
     id = db.Column(db.Integer(),primary_key=True,autoincrement=True)
     username = db.Column(db.String(120), nullable=False,unique=True)
     password = db.Column(db.String(120),nullable=False)
+    isVerified = db.Column(db.Boolean, nullable=False,default=False)
+    email = db.Column(db.String(120),nullable=False,unique=True)
 
     def create(self):
         db.session.add(self)
         db.session.commit()
         return self
+    
     @classmethod
     def find_by_username(cls,username):
         return cls.query.filter_by(username=username).first()
@@ -23,6 +26,10 @@ class User(db.Model):
     @staticmethod
     def verify_hash(password,hash):
         return sha256.verify(password,hash)
+    
+    @classmethod
+    def find_by_email(cls,email):
+        return cls.query.filter_by(email=email).first()
 class UserSchema(ModelSchema):
     class Meta(ModelSchema.Meta):
         model = User
@@ -30,3 +37,5 @@ class UserSchema(ModelSchema):
     id = fields.Integer(dump_only=True)
     username = fields.String(required=True)
     password = fields.String()
+    email = fields.String(required=True)
+    isVerified = fields.Boolean()
