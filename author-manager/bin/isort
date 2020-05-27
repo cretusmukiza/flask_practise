@@ -1,4 +1,4 @@
-#!/home/troy/practise/author-manager/author-manager/bin/python3.7
+#!/home/troy/practise/author-manager/author-manager/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,4 +1,5 @@
-from flask import Flask,jsonify
+
+from flask import Flask,jsonify,send_from_directory
 from flask_jwt_extended import JWTManager
 import logging
 from api.config.config import ProductionConfig,TestingConfig,DevelopmentConfig
@@ -31,6 +32,11 @@ with app.app_context():
 app.register_blueprint(author_routes,url_prefix='/api/authors')
 app.register_blueprint(book_routes,url_prefix= '/api/books')
 app.register_blueprint(user_routes,url_prefix="/api/users")
+
+@app.route('/avatar/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FILE'],filename)
+
 
 # Global http configurations
 @app.after_request

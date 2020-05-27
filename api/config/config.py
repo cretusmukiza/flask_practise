@@ -2,7 +2,7 @@ class Config(object):
     DEBUG = False
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATION = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:12345@localhost:5432/author'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:12345@localhost:5432/authors'
     JWT_SECRET_KEY = 'zzzzz-xxxx-0000'
     SECRET_KEY = 'MEWMF-3034-121OD'
     SECURITY_PASSWORD_SALT = 'MEO@@@@288****'
@@ -13,6 +13,7 @@ class Config(object):
     MAIL_PASSWORD = 'SENDER-EMAIL-PASSWORD'
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
+    UPLOAD_FOLDER = 'images'
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:12345@localhost:5432/practise'
